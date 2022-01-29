@@ -6,40 +6,108 @@
 
 #include "main.h"
 
+#define PROGRAMNAME "Dicy-x"
+#define VERSION "v.0.0-1a"
+
 int main(int argc, char *argv[]) {
 
     // functions
     void usage();
 
+    if (argc>1) {
+        std::cout << "Error. You've entered too many parameters!" << std::endl;
+        std::cout << std::endl;
+        usage();
+        exit(1);
+    }
+
     // seed the random number generator
     srand(time(NULL));
 
-    int eyes = 6;
+    // variables
+    int eyes=6;
+    int tosses=1;
     int x; 
+    int y;
+    int z;
+    
+    // number of dices
+    std::cout << "nr. of dices?: ";
 
-    int dice1;
-    int dice2;
-    int dice3;
-    int dice4;
-    int dice5;
-
-    dice1 = rand() % eyes + 1;
-    dice2 = rand() % eyes + 1;
-    dice3 = rand() % eyes + 1;
-    dice4 = rand() % eyes + 1;
-    dice5 = rand() % eyes + 1;
-
-    std::cout << "nr. of dices? [1-5]: ";
     cin >> x;
+    
+    // nr. of eyes
+    std::cout << "nr. of eyes on the dice?: ";
 
-    if (x>5 || x<1) {
-        usage();
+    cin >> y;
+    eyes=y;
+
+    // tosses
+    std::cout << "How many tosses?: ";
+    cin >> z;
+    tosses = z;
+
+    int counter = 0;
+    const int xl = x;
+    int dice[xl];
+
+    const int numbersLimit = tosses * xl;
+    int numbers[numbersLimit];
+
+    for (int i=0; i<tosses; i++) {
+        std::cout << std::endl;
+        std::cout << "--- Round (" << (i+1) << ") ---" << std::endl;
+        std::cout << std::endl;
+        
+        for (int j=0; j<xl; j++) {
+            dice[j] = rand() % eyes + 1;
+            numbers[counter] = dice[j];
+            counter++;
+
+            std::cout << "- Dice (" << (j+1) << ") --> " << dice[j] << std::endl;
+        }
     }
+
+    int counter2=0;
+    int roundCount=1;
+
+    std::cout << std::endl << "Here are all your numbers:" << std::endl;
+
+    for (int i=0; i<tosses; i++) {
+
+        std::cout << std::endl << "Round (" << roundCount++ << ") -> { ";
+
+        for (int j=0; j<xl; j++) {
+            
+            if (counter2 < numbersLimit) {
+                std::cout << numbers[counter2++];
+            }
+            
+            if (j < numbersLimit && (j<(numbersLimit/tosses) - 1)) {
+                std::cout << ",";
+            }
+        }
+
+        std::cout << " }. ";
+    }
+
+    // std::cout << "\b." << std::endl;
 
 return 0;
 }
 
 void usage() {
-
+    void title();
+    std::cout << std::endl;
+    title();
+    std::cout << "No arguments for the program parameters, please!" << std::endl;
+    std::cout << std::endl;
 exit(1);
 };
+
+void title() {
+    std::cout << PROGRAMNAME << " " << VERSION << std::endl;
+    std::cout << "This program was made for Lotto! (Among other things)." << std::endl;
+    std::cout << std::endl;
+}
+// eof
