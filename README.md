@@ -1,3 +1,3 @@
 # dicy_x
 
-Common dice roller for fun. Just like any other dice roller.
+Just a really simple dice roller. Just like any other simple dice roller.
