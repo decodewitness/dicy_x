@@ -6,7 +6,7 @@
 
 #include "main.h"
 
-#define PROGRAMNAME "Dicy-x"
+#define PROGRAMNAME "Dicy_x"
 #define VERSION "v.0.0-1a"
 
 int main(int argc, char *argv[]) {
