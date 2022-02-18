@@ -61,10 +61,13 @@ int main(int argc, char *argv[]) {
         
         for (int j=0; j<xl; j++) {
             dice[j] = rand() % eyes + 1;
+            if (j%3==0) {
+                sleep(1);
+            }
             numbers[counter] = dice[j];
             counter++;
 
-            std::cout << "- Dice (" << (j+1) << ") --> " << dice[j] << std::endl;
+            std::cout << std::setw(10) << "- Dice (" << (j+1) << ") --> " << dice[j] << std::endl;
         }
     }
 
@@ -74,25 +77,18 @@ int main(int argc, char *argv[]) {
     std::cout << std::endl << "Here are all your numbers:" << std::endl;
 
     for (int i=0; i<tosses; i++) {
-
         std::cout << std::endl << "Round (" << roundCount++ << ") -> { ";
-
         for (int j=0; j<xl; j++) {
-            
             if (counter2 < numbersLimit) {
                 std::cout << numbers[counter2++];
             }
-            
             if (j < numbersLimit && (j<(numbersLimit/tosses) - 1)) {
                 std::cout << ",";
             }
         }
-
         std::cout << " }. ";
     }
-
     // std::cout << "\b." << std::endl;
-
 return 0;
 }
 
